@@ -1,4 +1,5 @@
-package igorhmm.currenttime;
+﻿package igorhmm.currenttime;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 	 
