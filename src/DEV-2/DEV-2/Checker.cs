@@ -10,7 +10,7 @@ namespace DEV_2
     class Checker
     {
         private bool correctExpression = true;
-
+        private string operations = "+-*/"; 
         // If  input data correct return true 
         public bool checkInputData(string data)
         {
@@ -61,12 +61,11 @@ namespace DEV_2
         {
             bool check = true;
 
-            if ((data[0] == '+') || (data[0] == '-') || (data[0] == '*') || (data[0] == '/'))
+            if (operations.Contains(data[0]) == true)
                 check = false;
 
-            if ((data[data.Length - 1] == '+') || (data[data.Length - 1] == '-') || (data[data.Length - 1] == '*') || (data[data.Length - 1] == '/'))
+            if (operations.Contains(data[data.Length - 1]) == true)
                 check = false;
-
             return check;
         }
 
@@ -80,7 +79,7 @@ namespace DEV_2
 
             foreach (char c in data)
             {
-                if (c == '*' || c == '-' || c == '+' || c == '/')
+                if (operations.Contains(c)==true)
                     currentSymbol = true;
                 else
                     currentSymbol = false;
@@ -101,7 +100,7 @@ namespace DEV_2
             bool check = true;
             foreach (char symb in data)
             {
-                if ((symb != '.') && (symb != '+') && (symb != '-') && (symb != '*') && (symb != '/') && (symb != '(') && (symb != ')') && (!Char.IsDigit(symb)))
+                if ((operations.Contains(symb)==false) && (!Char.IsDigit(symb)))
                 {
                     check = false;
                     break;
