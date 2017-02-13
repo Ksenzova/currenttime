@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,7 +12,6 @@ namespace DEV_2
         //  Using + - * / ()
         static void Main(string[] args)
         {
-            
             string expression;
             // choose way of input
             ChooseInput choose = new ChooseInput();

@@ -11,6 +11,7 @@ namespace DEV_2
     {
         private bool correctExpression = true;
         private string operations = "+-*/"; 
+
         // If  input data correct return true 
         public bool checkInputData(string data)
         {
@@ -60,12 +61,12 @@ namespace DEV_2
         private bool checkFirstLastSymbol(string data)
         {
             bool check = true;
-
             if (operations.Contains(data[0]) == true)
                 check = false;
 
             if (operations.Contains(data[data.Length - 1]) == true)
                 check = false;
+
             return check;
         }
 
@@ -80,6 +81,7 @@ namespace DEV_2
             foreach (char c in data)
             {
                 if (operations.Contains(c)==true)
+
                     currentSymbol = true;
                 else
                     currentSymbol = false;
