@@ -50,6 +50,5 @@ namespace DEV_3
         {
             Console.WriteLine(name + "  " + surname + "  " + sex + "  " + age);
         }
-
     }
 }

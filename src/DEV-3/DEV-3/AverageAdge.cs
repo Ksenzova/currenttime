@@ -3,7 +3,7 @@
 namespace DEV_3
 {
     // Calculate Average Age of Users
-    class AverageAge
+    class AverageAdge
     {
         private float age = 0;
         private float numberOfUsers = 0;

@@ -14,7 +14,6 @@ namespace DEV_3
         private string usersData;
         private string[] parseUsersData;
  
-
         // Ipput all  User's options
         public User GetUser()
         {
@@ -23,7 +22,6 @@ namespace DEV_3
             surname = GetSurname();
             sex = GetSex();
             adge = GetAdge();
-
             User user = new User(name,surname,sex,adge);
             return user;
         }

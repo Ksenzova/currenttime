@@ -11,14 +11,15 @@ namespace DEV_3
         {
             Input input = new Input();
             List<User> usersList = new List<User>();
-            ConsoleKeyInfo cki;
-            cki = Console.ReadKey();
+
+            // Stop write User when enter ESC
+            ConsoleKeyInfo cki = Console.ReadKey();
             while (cki.Key != ConsoleKey.Escape)
             {
                 usersList.Add(input.GetUser());
                 cki = Console.ReadKey();
+            } 
 
-            } while (cki.Key != ConsoleKey.Escape);
             if (usersList.Count!=0)
             {
                 // Write the oldest User
