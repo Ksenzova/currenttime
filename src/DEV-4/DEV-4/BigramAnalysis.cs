@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 
-
 namespace DEV_4
 {
     // Calculate number of bigrams,  
@@ -9,7 +8,6 @@ namespace DEV_4
     {
         private List<string> allBigrams = new List<string>();
         private List<float> numberOfAllBigrams = new List<float>();
-        private float numaAllBigrams;
         private const int firstInitBigram = 1;
          
         /// <summary>

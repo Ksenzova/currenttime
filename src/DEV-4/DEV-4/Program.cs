@@ -1,17 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DEV_4
 {
+    /// <summary>
+    /// Make frequency text analysis: 
+    /// Find frequency of bigrams( pair of letters)
+    /// Find words with more than five letters
+    /// Add new text to existing
+    /// </summary>
     class Program
     {
-
         static void Main(string[] args)
         {
-
             string text = "";
             TextAdder textAdder = new TextAdder();
             BigramAnalysis analysis = new BigramAnalysis();
