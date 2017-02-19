@@ -1,6 +1,5 @@
-﻿using System;
+using System;
 using System.Data;
-
 
 namespace DEV_2
 {

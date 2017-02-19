@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,13 +8,22 @@ namespace DEV_2
 {
     class Program
     {
-
         // Caclulating arithmetic expressions
         //  Using + - * / ()
         static void Main(string[] args)
         {
+            string expression;
+            // choose way of input
             ChooseInput choose = new ChooseInput();
-            choose.chooseInputWay(args);
+            expression = choose.chooseInputWay(args);
+            // check input data
+            Checker checker = new Checker();
+            // if input expression is valid calculate it
+            if (checker.checkInputData(expression) == true)
+            {
+                Calculator calc = new Calculator();
+                calc.calculate(expression);
+            }
             Console.ReadKey();
         }
     }
