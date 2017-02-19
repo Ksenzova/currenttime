@@ -22,7 +22,7 @@ namespace DEV_4
                 analysis.CalculateBigrams(textAdder.AddAdditionalText(ref text));
                 Console.WriteLine(text);
                 analysis.OutputBigramFrequency();
-                Console.WriteLine("More than five letters in the word in {0} words", counterWords.CalFiveLLettersWords(text));
+                Console.WriteLine("More than five letters in the word in {0} words", counterWords.CalculateFiveLettersWords(text));
             }
         }
     }

@@ -10,11 +10,11 @@
         private char[] separators = new char[] { ',', '.', '!', '?' , ' ','_'};
        
         /// <summary>
-        /// 
+        /// Calculate number of words with more than 5 words
         /// </summary>
         /// <param name="text"> input text</param>
         /// <returns>number of words with more than 5 Letters</returns>
-        public int CalFiveLLettersWords(string text)
+        public int CalculateFiveLettersWords(string text)
         {  
             words = text.Split(separators);
             foreach(string word in words)

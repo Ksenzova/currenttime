@@ -61,7 +61,6 @@ namespace DEV_4
                 Console.WriteLine("'{0}' -> {1}",bigram,numberOfAllBigrams[index]/CalculateAllBigrams());
                 index++;
             }
-     
         }
 
         /// <summary>
