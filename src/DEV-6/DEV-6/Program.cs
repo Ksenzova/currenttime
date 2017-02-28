@@ -40,51 +40,26 @@ namespace DEV_6
             {
                 formate = Format.def;
             }
-            
-            switch(formate)
-            {
-                case Format.h:
-                        formater.Form = new Timh();
-                        break;
-                case Format.hh:
-                        formater.Form = new Timhh();
-                        break;
-                case Format.H:
-                        formater.Form = new TimeH();
-                        break;
-                case Format.HH:
-                        formater.Form = new TimeHH();
-                        break;
-                case Format.ddd:
-                        formater.Form = new Timeddd();
-                        break;
-                case Format.dd:
-                        formater.Form = new Timedd();
-                        break;
-                case Format.d:
-                        formater.Form = new Timed();
-                        break;
-                case Format.dddd:
-                        formater.Form = new Timedddd();
-                        break;
-                case Format.yyyy:
-                        formater.Form = new Timeyyyy();
-                        break;
-                case Format.yyy:
-                    formater.Form = new Timeyyy();
-                    break;
-                case Format.yy:
-                    formater.Form = new Timeyy();
-                    break;
-                case Format.y:
-                    formater.Form = new Timey();
-                    break;
-                default:
-                    break;
-            }
 
-            string formateDate = formater.GetData(curDate);
-            Console.WriteLine(formateDate); 
+            string formateDate;
+            formater.Form = new FormatHour();
+            formateDate = formater.GetData(curDate, formate);
+            if (formateDate != String.Empty)
+            {
+                Console.WriteLine(formateDate);
+            }
+            formater.Form = new FormatYear();
+            formateDate = formater.GetData(curDate, formate);
+            if (formateDate != String.Empty)
+            {
+                Console.WriteLine(formateDate);
+            }
+            formater.Form = new FormatDay();
+            formateDate = formater.GetData(curDate, formate);
+            if (formateDate != String.Empty)
+            {
+                Console.WriteLine(formateDate);
+            }
             Console.ReadKey();
         }
     }

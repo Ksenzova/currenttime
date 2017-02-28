@@ -1,4 +1,5 @@
 ﻿using System;
+using static DEV_6.Program;
 
 namespace DEV_6
 {   
@@ -12,9 +13,9 @@ namespace DEV_6
             Form= form;
         }
         public IFormat Form { private get; set; }
-        public string GetData(DateTime curDate)
+        public string GetData(DateTime curDate,  Format form)
         {
-            return Form.GetData(curDate);
+            return Form.GetData(curDate,form);
         }
     }
 }
