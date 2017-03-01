@@ -21,7 +21,7 @@ namespace DEV_7
                 TimeData timeDate = new TimeData();
                 DateParser dateParser = new DateParser();
                 dateParser.ParseData(inputDate, ref timeDate);
-
+        
                 DateChecker dateChecher = new DateChecker();
                 bool IsValidDate = dateChecher.IsValidDate(timeDate.Year, timeDate.Month, timeDate.Day);
 

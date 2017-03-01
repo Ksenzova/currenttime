@@ -18,12 +18,7 @@ namespace DEV_7
 
         public bool IsValidDate(ushort year, ushort month, ushort day)
         {
-            bool isValid = true;
-            if ((IsValidDay(day, month, year) != true) || (IsValidMonth(month) != true) || (IsValidYear(year) != true))
-            {
-                isValid = false;
-            }
-            return isValid;
+            return ((IsValidDay(day, month, year) != true) || (IsValidMonth(month) != true) || (IsValidYear(year) != true))? false : true;
         }
 
         private bool IsValidMonth(ushort month)
@@ -65,12 +60,7 @@ namespace DEV_7
 
         private bool IsLeapYear(ushort year)
         {
-            bool isLeapYear = false;
-            if( ((year % 4 == 0) &&(year % 100 != 0)) || (year % 400 == 0))
-            {
-                isLeapYear = true;
-            }
-            return isLeapYear;
+            return (((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0)) ? true : false;
         }
     }
 }

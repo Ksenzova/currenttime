@@ -1,4 +1,6 @@
-﻿namespace DEV_7
+﻿using System;
+
+namespace DEV_7
 {
     /// <summary>
     /// Checkinput hours, minutes, seconds
@@ -13,25 +15,38 @@
 
         public bool IsValidTime(ushort hour, ushort minute, ushort second)
         {
-            bool isValid = true;
-            if ((IsValidHour(hour) == false) || (IsValidMinitSecond(minute) == false) || (IsValidMinitSecond(second)==false))
-            {
-                isValid = false;
-            }
-            return isValid;
+            return ((IsValidHour(hour) == false) || (IsValidMinute(minute) == false) || (IsValidSecond(second) == false)) ? false : true;
         }
 
         private bool IsValidHour(ushort hour)
         {
             bool isValid = true;
-            isValid =((hour > MaxHour) || (hour < MinHour)) ? false : true;
+            if ((hour > MaxHour) || (hour < MinHour))
+            {
+                isValid = false;
+                Console.WriteLine("Not valid Hour");
+            }
             return isValid;
         }
 
-        private bool IsValidMinitSecond(int minutes)
+        private bool IsValidMinute(int minutes)
         {
             bool isValid = true;
-            isValid = ((minutes > MaxMiniuteSecond) || (minutes < MaxMiniuteSecond)) ? false : true;
+            if ((minutes > MaxMiniuteSecond) || (minutes < MinMinuteSecond))
+            {
+                isValid = false;
+                Console.WriteLine("Not valid Minute");
+            }
+            return isValid;
+        }
+        private bool IsValidSecond(int second)
+        {
+            bool isValid = true;
+            if ((second > MaxMiniuteSecond) || (second < MinMinuteSecond))
+            {
+                isValid = false;
+                Console.WriteLine("Not valid Minute");
+            }
             return isValid;
         }
     }

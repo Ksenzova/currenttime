@@ -1,31 +1,24 @@
-﻿namespace DEV_7
+﻿using System.Text.RegularExpressions;
+
+namespace DEV_7
 {
+    public enum DatePriority
+    {
+        Month = 0,
+        Day = 1,
+        Year = 2,
+        Hour = 3,
+        Minute = 4,
+        Second = 5
+    }
     /// <summary>
     /// Check date format MM.dd.yyyy HH:mm:ss;
     /// </summary>
     class FormatChecker
     {
-        private string formatSeparators = ".. ::";
-
         public bool IsValidForm(string inputDate)
         {
-            bool isValid = true;
-            inputDate.Trim(' ');
-            string separators = string.Empty;
-
-            foreach (char symbol in inputDate)
-            {
-                if (!char.IsDigit(symbol))
-                {
-                    separators = string.Concat(separators, symbol);
-                }
-            }
-
-            if (string.Compare(formatSeparators, separators) != 0)
-            {
-                isValid = false;
-            }
-            return isValid;
+             return Regex.Match(inputDate, @"\d{2}.\d{2}.\d{4}\s\d{2}:\d{2}:\d{2}").Success;
         }
     }
 }
