@@ -27,7 +27,7 @@ namespace DEV_8
             }
             else
             {
-                throw new Exception("These matrix cannot be multiplied");
+                throw new Exception("These matrixs cannot be multiplied");
             }
             return resultMatrix;
         }

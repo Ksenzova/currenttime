@@ -4,9 +4,6 @@ namespace DEV_8
 {
     class Printer
     {
-        /// <summary>
-        /// Print matrix in matrix form
-        /// </summary>
         public static void Print(double[,] matrix)
         {
             for(int i = 0; i < matrix.GetLength(0); i++)

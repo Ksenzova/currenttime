@@ -10,12 +10,24 @@ namespace DEV_8
         static void Main(string[] args)
         {
             MatrixBuilder matrixBuilder = new MatrixBuilder();
-            int[] size = matrixBuilder.GetMatrixSize(); 
-            double[,] matrixA = matrixBuilder.GetMatrix(size[0], size[1]);
 
-            size = matrixBuilder.GetMatrixSize();  
-            double[,] matrixB = matrixBuilder.GetMatrix(size[0], size[1]);
+            // Create matrix A
+            Console.WriteLine("Input matrix size. Example 2x3");
+            string sizeMatrix = Console.ReadLine();
+            int[] size = matrixBuilder.GetMatrixSize(sizeMatrix);
+            Console.WriteLine("Input elements of matrix");
+            string inputString = Console.ReadLine();
+            double[,] matrixA = matrixBuilder.GetMatrix(size[0], size[1], inputString);
 
+            //Create matrix B
+            Console.WriteLine("Input matrix size. Example 2x3");
+            sizeMatrix = Console.ReadLine();
+            size = matrixBuilder.GetMatrixSize(sizeMatrix);
+            Console.WriteLine("Input elements of matrix");
+            inputString = Console.ReadLine();
+            double[,] matrixB = matrixBuilder.GetMatrix(size[0], size[1], inputString);
+
+            // Multiply matrix A and matrix B
             MatrixMultiplier matrixMultiplier = new MatrixMultiplier();
             try
             {
@@ -26,7 +38,7 @@ namespace DEV_8
             {
                 Console.WriteLine(ex.Message);
             }
-
+            
             Console.ReadKey();
         }
     }
