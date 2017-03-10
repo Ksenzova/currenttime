@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Text.RegularExpressions;
 
 namespace DEV_10
 {
@@ -22,9 +24,13 @@ namespace DEV_10
                 line.Trim(' ',',');
                 if (line.Contains(field))
                 {
-                    value = line.Split(':')[1].Trim(',',' ','"');
+                    string s = ": ";
+                    string[] d =  Regex.Split(line,s);
+                    value = d[1];
                 }
            }
+            value = value.Trim(',');
+            value = value.Trim('"');
             return value;
         }
 

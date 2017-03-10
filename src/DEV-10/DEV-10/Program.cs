@@ -12,12 +12,14 @@ namespace DEV_10
         {
 
             JsonParser jsonParser = new JsonParser();
-            string toPath = "F://config.json";
-            string inputPath = "F://new1.json";
-            string outputPath = "";
+            string toPath = "F:/AT/currenttime/src/DEV-10/DEV-10/config.json";
+
+            string inputPath = jsonParser.GetField(toPath, "input");
+            string outputPath = jsonParser.GetField(toPath, "output");
 
             // Get fields to create Shopping Cart
             int oderID = int.Parse(jsonParser.GetField(inputPath, "orderID"));
+
             string shopperName = jsonParser.GetField(inputPath, "shopperName");
             string shopperEmail = jsonParser.GetField(inputPath, "shopperEmail");
 
@@ -28,7 +30,7 @@ namespace DEV_10
 
             bool orderCompleted = bool.Parse(jsonParser.GetField(inputPath, "orderCompleted"));
             ShoppingCart shoppingCart = new ShoppingCart(oderID,shopperName,shopperEmail,list,orderCompleted);         
-
+            
             Console.ReadKey();
         }
     }

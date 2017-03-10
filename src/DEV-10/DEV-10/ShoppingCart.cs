@@ -34,7 +34,7 @@ namespace DEV_10
         {
             this.orderID = orderID;
             this.shopperName = shopperName;
-            this.shopperEmail = shopperName;
+            this.shopperEmail = shopperEmail;
             this.contents = list;
             this.orderCompleted = oderCompleted;
             Console.WriteLine("Shopping card is Created");
