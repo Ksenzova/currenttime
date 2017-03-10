@@ -8,15 +8,18 @@ namespace DEV_10
     /// </summary>
     public struct Product
     {
-        int productID;
-        string productName;
-        int quantity;
-        public Product(int ID, string Name, int Quantity)
+        public int ProductID { get;}
+        public string ProductName { get;}
+        public int Quantity { get; }
+     
+        public Product(int ID, string Name, int quantity)
         {
-            productID = ID;
-            productName = Name;
-            quantity = Quantity;
+            ProductID = ID;
+            ProductName = Name;
+            Quantity = quantity;
         }
+
+
     }
 
     /// <summary>
@@ -24,19 +27,20 @@ namespace DEV_10
     /// </summary>
     class ShoppingCart
     {
-        private int orderID;
-        private string shopperName;
-        private string shopperEmail;
-        private bool orderCompleted;
-        private List<Product> contents =  new List<Product>();
+        public int OrderID { get; }
+        public string ShopperName { get; }
+        public string ShopperEmail { get; }
+        public bool OrderCompleted { get; }
+
+        public List<Product> Contents { get; }
 
         public ShoppingCart(int orderID, string shopperName, string shopperEmail,List<Product> list, bool oderCompleted)
         {
-            this.orderID = orderID;
-            this.shopperName = shopperName;
-            this.shopperEmail = shopperEmail;
-            this.contents = list;
-            this.orderCompleted = oderCompleted;
+            this.OrderID = orderID;
+            this.ShopperName = shopperName;
+            this.ShopperEmail = shopperEmail;
+            this.Contents = list;
+            this.OrderCompleted = oderCompleted;
             Console.WriteLine("Shopping card is Created");
         }
     }

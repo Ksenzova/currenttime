@@ -29,9 +29,11 @@ namespace DEV_10
             List<Product> list = convertor.GetProductList(initList);
 
             bool orderCompleted = bool.Parse(jsonParser.GetField(inputPath, "orderCompleted"));
-            ShoppingCart shoppingCart = new ShoppingCart(oderID,shopperName,shopperEmail,list,orderCompleted);         
-            
-            Console.ReadKey();
+            ShoppingCart shoppingCart = new ShoppingCart(oderID,shopperName,shopperEmail,list,orderCompleted);
+       
+            // Create Json file
+            JsonBuilder jsBuilder = new JsonBuilder();
+            jsBuilder.CreateJson(shoppingCart, outputPath);
         }
     }
 }
