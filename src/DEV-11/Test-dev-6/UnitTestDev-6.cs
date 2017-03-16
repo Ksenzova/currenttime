@@ -19,5 +19,6 @@ namespace Test_dev_6
             Formater formater = new Formater(new FormatYear());
             Format formate = (Format)Enum.Parse(typeof(Format), "error");
         }
+
     }
 }
