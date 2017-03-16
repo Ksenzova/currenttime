@@ -3,7 +3,10 @@ using static DEV_6.Program;
 
 namespace DEV_6
 {
-    class FormatYear :IFormat
+    /// <summary>
+    /// Formmat year y yy yyy yyyy
+    /// </summary>
+    public class FormatYear :IFormat
     {
         public string GetData(DateTime curDate, Format form)
         {
