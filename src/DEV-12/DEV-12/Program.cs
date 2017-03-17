@@ -37,14 +37,15 @@ namespace DEV_12
             {
                 Console.WriteLine("Error format of input data");
             }
-            catch(CannotAchieve ex)
-            {
-                    Console.WriteLine(ex.Message);
-            }
             catch (NotValidInputField ex)
             {
                 Console.WriteLine(ex.Message);
             }
+            catch (CannotAchieve ex)
+            {
+                    Console.WriteLine(ex.Message);
+            }
+            
             Console.ReadKey();     
         }
     }

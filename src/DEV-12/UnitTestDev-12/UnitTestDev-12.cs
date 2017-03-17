@@ -131,7 +131,6 @@ namespace UnitTestDev_12
             string inputData = "black b2 d8";
             Parser parser = new Parser();
             ArrayList param = parser.GetParams(inputData);
-
             checker.Colour = (colour)param[0];
             checker.CoordiareCurrent = (Coordinate)param[1];
             checker.CoordinateNeed = (Coordinate)param[2];
@@ -141,10 +140,10 @@ namespace UnitTestDev_12
 
         [TestMethod]
         [ExpectedException(typeof(NotValidInputField))]
-        public void TestCanotAchieveInputField()
+        public void TestPutCheckerOnWhiteField()
         {
             Checker checker = new Checker();
-            string inputData = "white b1 f2";
+            string inputData = "white a2 b3";
             Parser parser = new Parser();
             ArrayList param = parser.GetParams(inputData);
 
@@ -154,8 +153,5 @@ namespace UnitTestDev_12
             Counter counter = new Counter();
             int calculatedSteps = counter.GetNumberOfSteps(checker);
         }
-
-
-
     }
 }

@@ -64,14 +64,12 @@ namespace DEV_12
         private bool IfValidInputField(Coordinate coordinate)
         {
             bool isValid = true;
-            if ((coordinate.Y%2==1) && (CalculateCoordinate(coordinate)%2==0))
+            List<char> list = new List<char>(pole);
+            if ((list.IndexOf(coordinate.X)+coordinate.Y) % 2 == 0)
             {
+
                 isValid = false;
             }
-            if ((coordinate.Y % 2 == 0) && (CalculateCoordinate(coordinate) % 2 == 1))
-            {
-                isValid = false;
-            } 
             return isValid;
         }
 
