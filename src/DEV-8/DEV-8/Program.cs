@@ -7,6 +7,8 @@ namespace DEV_8
     /// </summary>
     class Program
     {
+
+        // Try catch  comments explain 
         static void Main(string[] args)
         {
             MatrixBuilder matrixBuilder = new MatrixBuilder();
