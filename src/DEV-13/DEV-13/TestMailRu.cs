@@ -20,143 +20,129 @@ namespace DEV_13
         [TestMethod]
         public void TestValidInput_Chrome()
         {
-            using (driver = new ChromeDriver())
-            {
-                driver.Navigate().GoToUrl("https://mail.ru");
-                autoPage = new AuthorizationPage(driver);
-                autoPage.FillForm(user, password);
-                homePage = new HomePage(driver);
-                homePage.FindNeedElement();
-            }         
+            driver = new ChromeDriver();
+            TestValidInput(driver);
         }
 
         [TestMethod]
         public void TestValidInput_Firefox()
         {
-            using (driver = new FirefoxDriver())
-            {
-                driver.Navigate().GoToUrl("https://mail.ru");
-                autoPage = new AuthorizationPage(driver);
-                autoPage.FillForm(user, password);
-                homePage = new HomePage(driver);
-                homePage.FindNeedElement();
-            }
-             
+            driver = new FirefoxDriver();
+            TestValidInput(driver);
         }
 
         [TestMethod]
         public void TestValidInput_Opera()
         {
-            using (driver = new OperaDriver())
-            {
-                driver.Navigate().GoToUrl("https://mail.ru");
-                autoPage = new AuthorizationPage(driver);
-                autoPage.FillForm(user, password);
-                homePage = new HomePage(driver);
-                homePage.FindNeedElement();
-            }
+            driver = new OperaDriver();
+            TestValidInput(driver);
         }
         
         // Empty input password
         [TestMethod]
         public void TestEmptyInputPassword_Chrome()
         {
-            using (driver = new ChromeDriver())
-            {
-                driver.Navigate().GoToUrl("https://mail.ru");
-                autoPage = new AuthorizationPage(driver);
-                autoPage.FillForm(user, "");
-                errorPage = new ErrorPage(driver);
-                errorPage.FindNeedElement();
-            }             
+            driver = new ChromeDriver();
+            TestEmptyInputPassword(driver);
         }
 
         [TestMethod]
         public void TestEmptyInputPassword_Firefox()
         {
-            using (driver = new FirefoxDriver())
-            {
-                driver.Navigate().GoToUrl("https://mail.ru");
-                autoPage = new AuthorizationPage(driver);
-                autoPage.FillForm(user, "");
-                errorPage = new ErrorPage(driver);
-                errorPage.FindNeedElement();
-            }
+            driver = new FirefoxDriver();
+            TestEmptyInputPassword(driver);
         }
 
-           [TestMethod]
-            public void TestEmptyInputPassword_Opera()
-            {
-                using (driver = new OperaDriver())
-                {
-                    driver.Navigate().GoToUrl("https://mail.ru");
-                    autoPage = new AuthorizationPage(driver);
-                    autoPage.FillForm(user, "");
-                    errorPage = new ErrorPage(driver);
-                    errorPage.FindNeedElement();
-                }
-            }
+        [TestMethod]
+        public void TestEmptyInputPassword_Opera()
+        {
+            driver = new OperaDriver();
+            TestEmptyInputPassword(driver);
+        }
            
 
         // Empty input password and login
         [TestMethod]
         public void TestEmptyInput_Chrome()
         {
-            using (driver = new ChromeDriver())
-            {
-                driver.Navigate().GoToUrl("https://mail.ru");
-                autoPage = new AuthorizationPage(driver);
-                autoPage.FillForm("", "");
-                errorPage = new ErrorPage(driver);
-                errorPage.FindNeedElement();
-            }
+            driver = new ChromeDriver();
+            TestEmptyInput(driver);
         }
 
         [TestMethod]
         public void TestEmptyInput_Firefox()
         {
-            using (driver = new FirefoxDriver())
-            {
-                driver.Navigate().GoToUrl("https://mail.ru");
-                autoPage = new AuthorizationPage(driver);
-                autoPage.FillForm("", "");
-                errorPage = new ErrorPage(driver);
-                errorPage.FindNeedElement();
-            }
+            driver = new FirefoxDriver();
+            TestEmptyInput(driver);
         }
 
-           [TestMethod]
-            public void TestEmptyInput_Opera()
-            {
-                using (driver = new OperaDriver())
-                {
-                    driver.Navigate().GoToUrl("https://mail.ru");
-                    autoPage = new AuthorizationPage(driver);
-                    autoPage.FillForm("", "");
-                    errorPage = new ErrorPage(driver);
-                    errorPage.FindNeedElement();
-                }
-            }
+        [TestMethod]
+        public void TestEmptyInput_Opera()
+        {
+            driver = new OperaDriver();
+            TestEmptyInput(driver);
+        }
             
 
         // Error input password
         [TestMethod]
         public void TestErrorInputPassword_Chrome()
         {
-            using (driver = new ChromeDriver())
-            {
-                driver.Navigate().GoToUrl("https://mail.ru");
-                autoPage = new AuthorizationPage(driver);
-                autoPage.FillForm(user, "23.03.2016");
-                errorPage = new ErrorPage(driver);
-                errorPage.FindNeedElement();
-            }
+            driver = new ChromeDriver();
+            TestErrorInputPassword(driver);
         }
 
         [TestMethod]
         public void TestErrorInputPassword_Firefox()
         {
-            using (driver = new FirefoxDriver())
+            driver = new FirefoxDriver();
+            TestErrorInputPassword(driver);
+        }
+
+        [TestMethod]
+        public void TestErrorInputPassword_Opera()
+        {
+            driver = new OperaDriver();
+            TestErrorInputPassword(driver);
+        }
+
+        // Error input login
+        [TestMethod]
+        public void TestNotValidLogin_Chrome()
+        {
+            driver = new ChromeDriver();
+            TestNotValidLogin(driver);
+        }
+
+        [TestMethod]
+        public void TestNotvalidLogin_Firefox()
+        {
+            driver = new FirefoxDriver();
+            TestNotValidLogin(driver);
+        }
+
+        [TestMethod]
+        public void TestNotValidLogin_Opera()
+        {
+            driver = new OperaDriver();
+            TestNotValidLogin(driver);
+        }
+
+        public void TestNotValidLogin(IWebDriver driver)
+        {
+            using (driver)
+            {
+                driver.Navigate().GoToUrl("https://mail.ru");
+                autoPage = new AuthorizationPage(driver);
+                autoPage.FillForm("123", password);
+                errorPage = new ErrorPage(driver);
+                errorPage.FindNeedElement();
+            }
+        }
+
+        public void TestErrorInputPassword(IWebDriver driver)
+        {
+            using (driver)
             {
                 driver.Navigate().GoToUrl("https://mail.ru");
                 autoPage = new AuthorizationPage(driver);
@@ -166,57 +152,41 @@ namespace DEV_13
             }
         }
 
-           [TestMethod]
-            public void TestErrorInput_Opera()
-            {
-                using (driver = new OperaDriver())
-                {
-                    driver.Navigate().GoToUrl("https://mail.ru");
-                    autoPage = new AuthorizationPage(driver);
-                    autoPage.FillForm(user, "23.03.2016");
-                    errorPage = new ErrorPage(driver);
-                    errorPage.FindNeedElement();
-                }
-            }
-
-        // Error input login
-        [TestMethod]
-        public void TestNotValidLogin_Chrome()
+        public void TestEmptyInput(IWebDriver driver)
         {
-            using (driver = new ChromeDriver())
+            using (driver)
             {
                 driver.Navigate().GoToUrl("https://mail.ru");
                 autoPage = new AuthorizationPage(driver);
-                autoPage.FillForm("123", password);
+                autoPage.FillForm("", "");
                 errorPage = new ErrorPage(driver);
                 errorPage.FindNeedElement();
             }
         }
 
-        [TestMethod]
-        public void TestNotvalidLogin_Firefox()
+        public void TestEmptyInputPassword(IWebDriver driver)
         {
-            using (driver = new FirefoxDriver())
+            using (driver)
             {
                 driver.Navigate().GoToUrl("https://mail.ru");
                 autoPage = new AuthorizationPage(driver);
-                autoPage.FillForm("123", password);
+                autoPage.FillForm(user, "");
                 errorPage = new ErrorPage(driver);
                 errorPage.FindNeedElement();
             }
         }
 
-        [TestMethod]
-        public void TestNotValidLogin_Opera()
+        public void TestValidInput(IWebDriver driver)
         {
-            using (driver = new OperaDriver())
+            using (driver)
             {
                 driver.Navigate().GoToUrl("https://mail.ru");
                 autoPage = new AuthorizationPage(driver);
-                autoPage.FillForm("123",password);
-                errorPage = new ErrorPage(driver);
-                errorPage.FindNeedElement();
+                autoPage.FillForm(user, password);
+                homePage = new HomePage(driver);
+                homePage.FindNeedElement();
             }
         }
+
     }
 }
