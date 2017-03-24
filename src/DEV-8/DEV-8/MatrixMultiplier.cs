@@ -17,7 +17,6 @@ namespace DEV_8
                 {
                     for (int j = 0; j<resultMatrix.GetLength(1); j++)
                     {
-                        resultMatrix[i, j] = 0;
                         for (int r = 0; r< matrixA.GetLength(0); r++)
                         {
                             resultMatrix[i,j] += matrixA[i, r] * matrixB[r, j];
