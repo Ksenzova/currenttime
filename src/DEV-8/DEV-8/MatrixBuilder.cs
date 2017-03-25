@@ -7,35 +7,49 @@ namespace DEV_8
     /// </summary>
     class MatrixBuilder
     {
+        private const string IncorrectForm = "Incorrect form. Try input again. Example 2x3";
+        private const string InputSymbolsAreNotNumbers = "Input symbol are not numbers.Try input again.";
+        private const string ErrorNumberOfElements = "Error input. Number of input elements do not match matrixSize.\nTry input again:";  
+
+        private int rows;
+        private int coloms;
+        private string[] notConvertSize;
+        private string[] notparsedElems;
+        private double[] elements;
+
         /// <summary>
         /// Get size of matrix if it is possible
         /// If input value are incorrect requests re-entry
         /// </summary>
         /// <param name="sizeMatrix">not parsed input string which contains size</param>
         /// <returns>size of matrix</returns>
-        public int[] GetMatrixSize(string sizeMatrix)
-        {
-            string[] notformatSize;
-            int[] size = new int[2];
-            try
+        public void GetMatrixSize(string sizeMatrix)
+        {      
+            // Control right input format of size and input numbers
+            // if its false call overwriting    
+            bool flag = false;
+
+            while(!flag)
             {
-                notformatSize = sizeMatrix.Split('x');
-                if(notformatSize.Length!=2)
+                notConvertSize = sizeMatrix.Split('x');                
+                if (notConvertSize.Length!= 2)
                 {
-                    Console.WriteLine("Incorret form. Try input again");
-                    size = GetMatrixSize(Console.ReadLine());
+                    Console.WriteLine(IncorrectForm);
+                    sizeMatrix = Console.ReadLine();
                 }
-                for (int i = 0; i < notformatSize.Length; i++)
+                else
                 {
-                    size[i] = int.Parse(notformatSize[i]);
+                    if (!int.TryParse(sizeMatrix.Split('x')[0], out rows) || !int.TryParse(sizeMatrix.Split('x')[1], out coloms))
+                    {
+                        Console.WriteLine(InputSymbolsAreNotNumbers);
+                        sizeMatrix = Console.ReadLine();
+                    }
+                    else
+                    {
+                        flag = true;
+                    }
                 }
-            }
-            catch(FormatException)
-            {
-                Console.WriteLine("Incorret form. Try input again");
-                size = GetMatrixSize(Console.ReadLine());
-            } 
-            return size;
+            }          
         }
 
         /// <summary>
@@ -43,35 +57,62 @@ namespace DEV_8
         /// If input value are incorrect requests re-entry
         /// </summary>
         /// <param name="inputString">not parsed string which contains element of matrix</param>
-        /// <returns>matrix</returns>
-        public double[,] GetMatrix(int rows, int coloms, string inputString)
+        /// <returns>formed matrix</returns>
+        public Matrix GetMatrix(string inputString)
         {
-            inputString = inputString.Trim(' ');
-            string[] elements = inputString.Split(' ');
-            double[,] matrix = new double[rows, coloms];
-            if(elements.Length!= rows*coloms)
+            // Control number of elements, if these eleements are numbers and can be parsed to double
+            // is it is flase call overwriting 
+            bool flag = false;
+            bool isElementsCanBeParsed = true;
+           
+            while (!flag)
             {
-                Console.WriteLine("Error input. Number of input elements do not match matrixSize.Try input again ");
-                matrix = GetMatrix(rows, coloms, Console.ReadLine()); 
+                inputString = inputString.Trim(' ');
+                notparsedElems = inputString.Split(' ');
+                elements = new double[notparsedElems.Length];
+                if (elements.Length != rows * coloms)
+                {
+                    Console.WriteLine(ErrorNumberOfElements);
+                    inputString = Console.ReadLine();
+                }
+                else
+                {
+                    for (int i = 0; i < elements.Length; i++)
+                    {
+                        isElementsCanBeParsed = double.TryParse(notparsedElems[i], out elements[i]);
+                        if (!isElementsCanBeParsed)
+                        {
+                            break;
+                        }
+                    }
+                    if (!isElementsCanBeParsed)
+                    {
+                        Console.WriteLine(InputSymbolsAreNotNumbers);
+                        inputString = Console.ReadLine();
+                    }
+                    else
+                    {
+                        flag = true;
+                    }
+                }                   
             }
-            int elementIndex = 0;         
+            return new Matrix(ConvertToTwoDemensionalArray());       
+        }
+
+        /// Convert one-dimensional array to two-dimensional array
+        private double [,] ConvertToTwoDemensionalArray()
+        {
+            double[,] resultElements = new double[rows, coloms];
+            int elem = 0;
             for (int i = 0; i < rows; i++)
             {
                 for (int j = 0; j < coloms; j++)
                 {
-                    try
-                    {
-                        matrix[i, j] = Convert.ToDouble(elements[elementIndex]);
-                        elementIndex++;
-                    }
-                    catch(FormatException)
-                    {
-                        Console.WriteLine("Error input. Elements are not valid ");
-                        matrix = GetMatrix(rows, coloms,Console.ReadLine());
-                    }
+                    resultElements[i, j] = elements[elem];
+                    elem++;
                 }
             }
-            return matrix;       
+            return resultElements;
         }
     }
 }
