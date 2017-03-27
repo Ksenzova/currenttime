@@ -14,6 +14,7 @@ namespace DEV_13
         HomePage homePage;
         AuthorizationPage autoPage;
         ErrorPage errorPage;
+        string URL = "https://mail.ru";
         string password = "23.03.2017";
         string user = "tat-de13@mail.ru";
 
@@ -132,7 +133,7 @@ namespace DEV_13
         {
             using (driver)
             {
-                driver.Navigate().GoToUrl("https://mail.ru");
+                driver.Navigate().GoToUrl(URL);
                 autoPage = new AuthorizationPage(driver);
                 autoPage.FillForm("123", password);
                 errorPage = new ErrorPage(driver);
@@ -144,7 +145,7 @@ namespace DEV_13
         {
             using (driver)
             {
-                driver.Navigate().GoToUrl("https://mail.ru");
+                driver.Navigate().GoToUrl(URL);
                 autoPage = new AuthorizationPage(driver);
                 autoPage.FillForm(user, "23.03.2016");
                 errorPage = new ErrorPage(driver);
@@ -156,7 +157,7 @@ namespace DEV_13
         {
             using (driver)
             {
-                driver.Navigate().GoToUrl("https://mail.ru");
+                driver.Navigate().GoToUrl(URL);
                 autoPage = new AuthorizationPage(driver);
                 autoPage.FillForm("", "");
                 errorPage = new ErrorPage(driver);
@@ -168,7 +169,7 @@ namespace DEV_13
         {
             using (driver)
             {
-                driver.Navigate().GoToUrl("https://mail.ru");
+                driver.Navigate().GoToUrl(URL);
                 autoPage = new AuthorizationPage(driver);
                 autoPage.FillForm(user, "");
                 errorPage = new ErrorPage(driver);
@@ -180,11 +181,13 @@ namespace DEV_13
         {
             using (driver)
             {
-                driver.Navigate().GoToUrl("https://mail.ru");
+                driver.Navigate().GoToUrl(URL);
+                driver.Manage().Timeouts().ImplicitlyWait(timeToWait);
                 autoPage = new AuthorizationPage(driver);
                 autoPage.FillForm(user, password);
                 homePage = new HomePage(driver);
                 homePage.FindNeedElement();
+                Assert.IsTrue(driver.PageSource.Contains("Входящие"));
             }
         }
 
