@@ -1,89 +1,71 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace DEV_12
 {
     /// <summary>
-    /// Count number of step to achieve need fieeld if it is possible
+    /// Calculate number of steps need draught to reach need coordinate
     /// </summary>
-    public class Counter
+    class Counter
     {
-        char[] pole = { 'a', 'b', 'c','d','e', 'f', 'g', 'h' };
-        const int SIZE = 8;
-        const int RIGHT = 9;
-        const int LEFT = 7;
-        int[] list = { 7, 7, 7, 7, 7, 7, 7, 7, 9, 9, 9, 9, 9, 9, 9, 9 };
-       
-        /// <summary>
-        /// Caclulate number of steps need to achieve input field
-        /// </summary>
-        /// <param name="cheque">contains all parametrs of checker</param>
-        /// <returns>number of steps</returns>
-         public int GetNumberOfSteps(Checker checker)
+        private Coordinate coordinateNeed;
+        private Draught draught;
+        public Counter(Coordinate coordinateNeed, Draught draught)
         {
-            int numberOfSteps = 0;
-            
-            int current = CalculateCoordinate(checker.CoordiareCurrent);
-            int need = CalculateCoordinate(checker.CoordinateNeed);
-            int difference = need - current ;
-            if ((IfValidInputField(checker.CoordinateNeed)==false)||(IfValidInputField(checker.CoordinateNeed) == false))
+            this.coordinateNeed = coordinateNeed;
+            this.draught = draught;
+        }
+        
+        /// <summary>
+        /// Calculate number of steps to reach need coordinate
+        /// if it is not possible throw Exeption
+        /// </summary>
+        /// <returns>number of steps</returns>
+        public int GetNumberOfSteps()
+        {
+            int steps= 0;
+            // If the cordinates are not the same
+            while(coordinateNeed !=draught.CoordinateCurrent)
             {
-                throw new NotValidInputField("Error input of coordinate. Unavaible to put checker on white fields");
-            }
-
-            if (checker.Colour == colour.black)
-            {
-                difference *= (-1);
-            }
-
-            for(int i = 0; i<8; i++)
-            {
-                for (int j = 0; j<8; j ++)
+                // calculate if it is possible to reach need coordinate
+                // accoding that white draught can move only up  and black can move only down
+                int temp = draught.Colour == colour.white ? coordinateNeed.Y - draught.CoordinateCurrent.Y :  draught.CoordinateCurrent.Y-coordinateNeed.Y;
+                if (temp<=0)
                 {
-                    if ((difference)==(i*RIGHT +j*LEFT))
+                    throw new Exception("Could not achieve the field");
+                }
+                // move right
+                if (coordinateNeed.ConvertXToInt() > draught.CoordinateCurrent.ConvertXToInt())
+                {
+                    draught.MoveRight(); 
+                    steps++;
+                }
+                else
+                {
+                    // move left
+                    if (coordinateNeed.ConvertXToInt() < draught.CoordinateCurrent.ConvertXToInt())
                     {
-                        numberOfSteps = i + j ;
+                        draught.MoveLeft();
+                        steps++;
+                    }
+                    else
+                    {
+                        //  move left if coordinatea are one about the other if it is possible
+                        if(draught.CoordinateCurrent.ConvertXToInt()>1 || draught.CoordinateCurrent.ConvertXToInt() == 8)
+                        {
+                            draught.MoveLeft();
+                            steps++;
+                        }
+                        else
+                        {                          
+                            draught.MoveRight();
+                            steps++;
+                        }
                     }
                 }
+
             }
-
-            if (numberOfSteps==0)
-            {
-                throw new CannotAchieve("Immposible achieve need field");
-            }
-            
-            return numberOfSteps;
-        }
-
-
-        /// <summary>
-        /// Check standing checker only on black fields
-        /// </summary>
-        /// <param name="coordinate">coordinate field</param>
-        /// <returns></returns>
-        private bool IfValidInputField(Coordinate coordinate)
-        {
-            bool isValid = true;
-            List<char> list = new List<char>(pole);
-            if ((list.IndexOf(coordinate.X)+coordinate.Y) % 2 == 0)
-            {
-
-                isValid = false;
-            }
-            return isValid;
-        }
-
-        /// <summary>
-        /// Calculate coordinates as value of  One-dimensional array
-        /// </summary>
-        /// <param name="coordinate">coordinate of field</param>
-        /// <returns>coordinates in line form</returns>
-        private int CalculateCoordinate(Coordinate coordinate)
-        {
-            List<char> list = new List<char>(pole);
-            return (coordinate.Y - 1) * SIZE + list.IndexOf(coordinate.X) + 1;
-        }    
-
+            return steps;          
+        }       
     }
-  
 }
+

@@ -5,47 +5,45 @@ using System.Text.RegularExpressions;
 namespace DEV_12
 {
     /// <summary>
-    /// Calculate is it is possible how many step need to achieve cuurent field
+    /// Calculate is it is possible how many step need draught to achieve curent field
     /// </summary>
     class Program
     {
         static void Main(string[] args)
         {
-            Checker checker = new Checker();
-            Console.WriteLine("Input parametrs in format: color currentCoordinate needCoordinate ");
-            string inputData = Console.ReadLine();
-            Parser parser = new Parser();
-            try
+            const string InputParams= "Input colour of draught current position and need position.Example: white a1 b2";
+            const string InputParamsCannotBeParsed = "Input parametrs cannnot be parsed.Try input again: ";
+            // do this progrm while input escape
+            ConsoleKeyInfo cki = new ConsoleKeyInfo();
+            do
             {
-                ArrayList param = parser.GetParams(inputData);
-                checker.Colour = (colour)param[0];
-                checker.CoordiareCurrent = (Coordinate)param[1];
-                checker.CoordinateNeed = (Coordinate)param[2];
-                Counter counter = new Counter();
-                Console.WriteLine(counter.GetNumberOfSteps(checker));
-                
-            }
-            catch (ArgumentException)
-            {
-                Console.WriteLine("Error format of input data");
-            }
-            catch (RegexMatchTimeoutException)
-            {
-                Console.WriteLine("Error format of field's value");
-            }
-            catch  (IndexOutOfRangeException)
-            {
-                Console.WriteLine("Error format of input data");
-            }
-            catch (NotValidInputField ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-            catch (CannotAchieve ex)
-            {
+                try
+                {                              
+                    Console.WriteLine(InputParams);
+                    string inputString = Console.ReadLine();
+                    Parser parser = new Parser();
+                    // input paramters while they cannot be parsed
+                    while (!parser.TryParseParams(inputString))
+                    {
+                        Console.Write(InputParamsCannotBeParsed);
+                        inputString = Console.ReadLine();
+                    }
+
+                    // form coordinate and  draught
+                    Coordinate coordinateNeed = parser.CoordinateNeed;
+                    Draught draught = new Draught(parser.DraughtColour, parser.CoordinateCurrent);
+
+                    // count number of steps
+                    Counter counter = new Counter(coordinateNeed, draught);
+                    Console.WriteLine(counter.GetNumberOfSteps());
+                       
+                }
+                catch(Exception ex)
+                {
                     Console.WriteLine(ex.Message);
-            }
-            
+                }
+            } while (cki.Key != ConsoleKey.Escape);
+
             Console.ReadKey();     
         }
     }
