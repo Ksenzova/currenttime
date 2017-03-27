@@ -7,6 +7,7 @@ namespace DEV_12
     /// </summary>
     public class Counter
     {
+        const int FieldSize = 8;
         private Coordinate coordinateNeed;
         private Draught draught;
         public Counter(Coordinate coordinateNeed, Draught draught)
@@ -50,7 +51,7 @@ namespace DEV_12
                     else
                     {
                         //  move left if coordinatea are one about the other if it is possible
-                        if(draught.CoordinateCurrent.ConvertXToInt()>1 || draught.CoordinateCurrent.ConvertXToInt() == 8)
+                        if(draught.CoordinateCurrent.ConvertXToInt()>1 || draught.CoordinateCurrent.ConvertXToInt() == FieldSize)
                         {
                             draught.MoveLeft();
                             steps++;
