@@ -13,6 +13,7 @@ namespace DEV_12
         {
             const string InputParams= "Input colour of draught current position and need position.Example: white a1 b2";
             const string InputParamsCannotBeParsed = "Input parametrs cannnot be parsed.Try input again: ";
+            Coordinate c = new Coordinate('a', 9);
             // do this progrm while input escape
             ConsoleKeyInfo cki = new ConsoleKeyInfo();
             do

@@ -70,7 +70,7 @@ namespace DEV_12
         {
             return (a.X != b.X || a.Y != b.Y) ? true : false;
         }
-        
+
         /// <summary>
         /// Ovverride method ToString() to out out coordinate
         /// </summary>

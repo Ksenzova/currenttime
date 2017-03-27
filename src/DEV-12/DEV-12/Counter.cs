@@ -5,7 +5,7 @@ namespace DEV_12
     /// <summary>
     /// Calculate number of steps need draught to reach need coordinate
     /// </summary>
-    class Counter
+    public class Counter
     {
         private Coordinate coordinateNeed;
         private Draught draught;

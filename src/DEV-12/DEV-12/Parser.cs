@@ -5,7 +5,7 @@ namespace DEV_12
     /// <summary>
     /// Parse from input string coordinate need, coordindte currrent, and colour of draught
     /// </summary>
-    class Parser
+    public class Parser
     {
         // Parsed paramtres
         private Coordinate coordinateNeed;
