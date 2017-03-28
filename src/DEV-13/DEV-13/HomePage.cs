@@ -21,7 +21,7 @@ namespace DEV_13
             var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(60));
             try
             {
-                wait.Until(driver => driver.FindElement(By.XPath(IncommingMessanges)));
+                wait.Until(ExpectedConditions.ElementExists(By.XPath(IncommingMessanges)));
             }
             catch (Exception)
             {

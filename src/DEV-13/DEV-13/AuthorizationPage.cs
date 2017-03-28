@@ -33,7 +33,7 @@ namespace DEV_13
             var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(60));
             try
             {
-                wait.Until(driver => driver.FindElement(By.Id(LoginButton)));
+                wait.Until(ExpectedConditions.ElementExists(By.Id(LoginButton)));
             }
             catch (Exception)
             {
