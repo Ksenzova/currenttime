@@ -1,4 +1,6 @@
 ﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Support.PageObjects;
+using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,16 +11,31 @@ namespace DEV_13
 {
     class ErrorPage
     {
-        IWebDriver driver;
-        By errorPage = By.XPath("//*[contains(text(),'Вход')]");
-        public ErrorPage(IWebDriver driver)
+        private IWebDriver driver;
+        public const string IncommingMessanges = "//*[contains(text(),'Вход')]";
+
+        [FindsBy(How = How.XPath, Using = IncommingMessanges)]
+        public IWebElement incomingingMessages;
+
+        public ErrorPage(IWebDriver Driver)
         {
-            this.driver = driver;
+            this.driver = Driver;
+            PageFactory.InitElements(driver, this);
         }
 
-        public void FindNeedElement()
+        public bool IsErrorPage()
         {
-            driver.FindElement(errorPage);
+            bool flag = true;
+            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(60));
+            try
+            {
+                wait.Until(driver => driver.FindElement(By.XPath(IncommingMessanges)));
+            }
+            catch (Exception)
+            {
+                flag = false;
+            }
+            return flag;
         }
     }
 }

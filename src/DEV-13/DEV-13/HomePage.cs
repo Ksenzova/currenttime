@@ -1,19 +1,33 @@
 ﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Support.PageObjects;
+using OpenQA.Selenium.Support.UI;
+using System;
 
 namespace DEV_13
 {
     class HomePage
-    {
-        IWebDriver driver;
-        By homePage = By.XPath("//*[contains(text(),'Входящие')]");
-        public HomePage(IWebDriver driver)
+    {       
+        public const string IncommingMessanges = "//*[contains(text(),'Входящие')]";
+        private IWebDriver driver;
+
+        public HomePage(IWebDriver Driver)
         {
-            this.driver = driver;
+            this.driver = Driver;
         }
-        public void FindNeedElement()
+
+        public bool IsHomePage()
         {
-            driver.FindElement(homePage);
+            bool flag = true;
+            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(60));
+            try
+            {
+                wait.Until(driver => driver.FindElement(By.XPath(IncommingMessanges)));
+            }
+            catch (Exception)
+            {
+                flag = false;
+            }
+            return flag;
         }
     }
-
 }

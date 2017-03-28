@@ -4,6 +4,7 @@ using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Opera;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
+using System;
 
 namespace DEV_13
 {
@@ -16,49 +17,49 @@ namespace DEV_13
         ErrorPage errorPage;
         string URL = "https://mail.ru";
         string password = "23.03.2017";
-        string user = "tat-de13@mail.ru";
+        string user = "tat-dev13@mail.ru";
 
         [TestMethod]
         public void TestValidInput_Chrome()
         {
-            driver = new ChromeDriver();
-            TestValidInput(driver);
+           bool IsValid = TestValidInput(new ChromeDriver());
+           Assert.IsTrue(IsValid);
         }
 
         [TestMethod]
         public void TestValidInput_Firefox()
         {
-            driver = new FirefoxDriver();
-            TestValidInput(driver);
+            bool IsValid = TestValidInput(new FirefoxDriver());
+            Assert.IsTrue(IsValid);
         }
 
         [TestMethod]
         public void TestValidInput_Opera()
         {
-            driver = new OperaDriver();
-            TestValidInput(driver);
+            bool IsValid = TestValidInput(new OperaDriver());
+            Assert.IsTrue(IsValid);
         }
         
         // Empty input password
         [TestMethod]
         public void TestEmptyInputPassword_Chrome()
         {
-            driver = new ChromeDriver();
-            TestEmptyInputPassword(driver);
+            bool IsValid =TestEmptyInputPassword(new ChromeDriver());
+            Assert.IsTrue(IsValid);
         }
 
         [TestMethod]
         public void TestEmptyInputPassword_Firefox()
         {
-            driver = new FirefoxDriver();
-            TestEmptyInputPassword(driver);
+            bool IsValid = TestEmptyInputPassword(new FirefoxDriver());
+            Assert.IsTrue(IsValid);
         }
 
         [TestMethod]
         public void TestEmptyInputPassword_Opera()
         {
-            driver = new OperaDriver();
-            TestEmptyInputPassword(driver);
+            bool IsValid = TestEmptyInputPassword(new OperaDriver());
+            Assert.IsTrue(IsValid);
         }
            
 
@@ -66,22 +67,22 @@ namespace DEV_13
         [TestMethod]
         public void TestEmptyInput_Chrome()
         {
-            driver = new ChromeDriver();
-            TestEmptyInput(driver);
+            bool IsValid = TestEmptyInput(new ChromeDriver());
+            Assert.IsTrue(IsValid);
         }
 
         [TestMethod]
         public void TestEmptyInput_Firefox()
         {
-            driver = new FirefoxDriver();
-            TestEmptyInput(driver);
+            bool IsValid = TestEmptyInput(new FirefoxDriver());
+            Assert.IsTrue(IsValid);
         }
 
         [TestMethod]
         public void TestEmptyInput_Opera()
         {
-            driver = new OperaDriver();
-            TestEmptyInput(driver);
+            bool IsValid = TestEmptyInput(new OperaDriver());
+            Assert.IsTrue(IsValid);
         }
             
 
@@ -89,47 +90,47 @@ namespace DEV_13
         [TestMethod]
         public void TestErrorInputPassword_Chrome()
         {
-            driver = new ChromeDriver();
-            TestErrorInputPassword(driver);
+            bool IsValid = TestErrorInputPassword(new ChromeDriver());
+            Assert.IsTrue(IsValid);
         }
 
         [TestMethod]
         public void TestErrorInputPassword_Firefox()
         {
-            driver = new FirefoxDriver();
-            TestErrorInputPassword(driver);
+            bool IsValid = TestErrorInputPassword(new FirefoxDriver());
+            Assert.IsTrue(IsValid);
         }
 
         [TestMethod]
         public void TestErrorInputPassword_Opera()
         {
-            driver = new OperaDriver();
-            TestErrorInputPassword(driver);
+            bool IsValid = TestErrorInputPassword(new OperaDriver());
+            Assert.IsTrue(IsValid);
         }
 
         // Error input login
         [TestMethod]
         public void TestNotValidLogin_Chrome()
         {
-            driver = new ChromeDriver();
-            TestNotValidLogin(driver);
+            bool IsValid = TestNotValidLogin(new ChromeDriver()); 
+            Assert.IsTrue(IsValid);
         }
 
         [TestMethod]
         public void TestNotvalidLogin_Firefox()
         {
-            driver = new FirefoxDriver();
-            TestNotValidLogin(driver);
+            bool IsValid = TestNotValidLogin(new FirefoxDriver());
+            Assert.IsTrue(IsValid);
         }
 
         [TestMethod]
         public void TestNotValidLogin_Opera()
         {
-            driver = new OperaDriver();
-            TestNotValidLogin(driver);
+            bool IsValid = TestNotValidLogin(new OperaDriver());
+            Assert.IsTrue(IsValid);
         }
 
-        public void TestNotValidLogin(IWebDriver driver)
+        public bool TestNotValidLogin(IWebDriver driver)
         {
             using (driver)
             {
@@ -137,11 +138,11 @@ namespace DEV_13
                 autoPage = new AuthorizationPage(driver);
                 autoPage.FillForm("123", password);
                 errorPage = new ErrorPage(driver);
-                errorPage.FindNeedElement();
+                return errorPage.IsErrorPage();
             }
         }
 
-        public void TestErrorInputPassword(IWebDriver driver)
+        public bool TestErrorInputPassword(IWebDriver driver)
         {
             using (driver)
             {
@@ -149,11 +150,11 @@ namespace DEV_13
                 autoPage = new AuthorizationPage(driver);
                 autoPage.FillForm(user, "23.03.2016");
                 errorPage = new ErrorPage(driver);
-                errorPage.FindNeedElement();
+                return errorPage.IsErrorPage();
             }
         }
 
-        public void TestEmptyInput(IWebDriver driver)
+        public bool TestEmptyInput(IWebDriver driver)
         {
             using (driver)
             {
@@ -161,11 +162,11 @@ namespace DEV_13
                 autoPage = new AuthorizationPage(driver);
                 autoPage.FillForm("", "");
                 errorPage = new ErrorPage(driver);
-                errorPage.FindNeedElement();
+                return errorPage.IsErrorPage();
             }
         }
 
-        public void TestEmptyInputPassword(IWebDriver driver)
+        public bool TestEmptyInputPassword(IWebDriver driver)
         {
             using (driver)
             {
@@ -173,23 +174,20 @@ namespace DEV_13
                 autoPage = new AuthorizationPage(driver);
                 autoPage.FillForm(user, "");
                 errorPage = new ErrorPage(driver);
-                errorPage.FindNeedElement();
+                return errorPage.IsErrorPage();
             }
         }
 
-        public void TestValidInput(IWebDriver driver)
+        public bool TestValidInput(IWebDriver driver)
         {
             using (driver)
             {
                 driver.Navigate().GoToUrl(URL);
-                driver.Manage().Timeouts().ImplicitlyWait(timeToWait);
                 autoPage = new AuthorizationPage(driver);
                 autoPage.FillForm(user, password);
                 homePage = new HomePage(driver);
-                homePage.FindNeedElement();
-                Assert.IsTrue(driver.PageSource.Contains("Входящие"));
+                return homePage.IsHomePage();
             }
         }
-
     }
 }
