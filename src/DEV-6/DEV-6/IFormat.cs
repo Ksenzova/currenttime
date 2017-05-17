@@ -3,7 +3,7 @@ using static DEV_6.Program;
 
 namespace DEV_6
 {
-    interface IFormat
+    public interface IFormat
     {
         string GetData(DateTime curDate, Format form);
     }

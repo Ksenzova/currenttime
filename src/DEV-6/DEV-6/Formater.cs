@@ -6,7 +6,7 @@ namespace DEV_6
     /// <summary>
     /// Form new type of formating date
     /// </summary>           
-    class Formater
+    public class Formater
     {
         public Formater( IFormat form)
         {
@@ -15,7 +15,7 @@ namespace DEV_6
         public IFormat Form { private get; set; }
         public string GetData(DateTime curDate,  Format form)
         {
-            return Form.GetData(curDate,form);
+           return Form.GetData(curDate,form);
         }
     }
 }

@@ -1,18 +1,20 @@
-﻿using System;
+﻿using DEV_11;
+using System;
+using System.Collections.Generic;
+using System.Globalization;
 
 namespace DEV_6
 {
     /// <summary>
     /// Return date in input format
     /// </summary>
-    class Program
+    public class Program
     {
         /// <summary>
         /// All types of format
         /// </summary>
         public enum Format
         {
-            def,
             h,
             hh,
             H,
@@ -24,42 +26,31 @@ namespace DEV_6
             yyyy,
             yyy,
             yy,
-            y
+            y,
+            MM,
+            MMM,
+            MMMM
         }
         static void Main(string[] args)
         {
             DateTime curDate = DateTime.Now;
             Console.WriteLine(curDate);
-            Formater formater = new Formater(new Def());
-            Format formate;
             try
             {
-               formate = (Format)Enum.Parse(typeof(Format), Console.ReadLine());
-            }
-            catch
+                string formedDate = string.Empty;
+                Console.WriteLine("Input format");
+                string inputFormat = Console.ReadLine();
+                Parser parser = new Parser();
+                List<Format> formats =  parser.GetFormats(inputFormat);
+                List<char> separators = parser.GetSeparators(inputFormat);
+                FormatBuilder formatBuilder = new FormatBuilder();
+                formedDate = formatBuilder.BuildFormat(formats,separators,curDate);
+                Console.WriteLine(formedDate);
+             }
+            catch (ArgumentException)
             {
-                formate = Format.def;
-            }
-
-            string formateDate;
-            formater.Form = new FormatHour();
-            formateDate = formater.GetData(curDate, formate);
-            if (formateDate != String.Empty)
-            {
-                Console.WriteLine(formateDate);
-            }
-            formater.Form = new FormatYear();
-            formateDate = formater.GetData(curDate, formate);
-            if (formateDate != String.Empty)
-            {
-                Console.WriteLine(formateDate);
-            }
-            formater.Form = new FormatDay();
-            formateDate = formater.GetData(curDate, formate);
-            if (formateDate != String.Empty)
-            {
-                Console.WriteLine(formateDate);
-            }
+                Console.WriteLine("Not valid format");
+            }          
             Console.ReadKey();
         }
     }
