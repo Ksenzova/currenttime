@@ -7,8 +7,8 @@ namespace TestLogin.Pages
 {
     class AuthorizationPage
     {
-        public const string UserNameField = "//*[text()='user_login']::following-sibling";
-        public const string PasswordTextField = "//*[text()='Password']::following-sibling";
+        public const string UserNameField = "//*[text()='user_login']/following-sibling::*[1]";
+        public const string PasswordTextField = "//*[text()='Password']::following-sibling::*[1]";
         public const string LoginButton = "//*[@id='wp-submit']";
 
         [FindsBy(How = How.Name, Using = UserNameField)]
